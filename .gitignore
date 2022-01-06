@@ -1,0 +1,9 @@
+*.o
+*.a
+vgcore*
+*~
+#*#
+a.out
+calc
+.vscode
+map
