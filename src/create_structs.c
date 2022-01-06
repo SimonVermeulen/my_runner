@@ -9,6 +9,12 @@
 #include "../include/my.h"
 #include <stdlib.h>
 
+void set_texture_and_pos(sfTexture *texture, sfSprite *sprite, sfVector2f pos)
+{
+    sfSprite_setTexture(sprite, texture, sfTrue);
+    sfSprite_setPosition(sprite, pos);
+}
+
 wall_t *create_wall(sfVector2f pos, int type)
 {
     wall_t *new_wall = NULL;
@@ -21,9 +27,7 @@ wall_t *create_wall(sfVector2f pos, int type)
     new_wall->bounciness = 0;
     if (!new_wall->texture || !new_wall->sprite)
         return (NULL);
-
-    sfSprite_setTexture(new_wall->sprite, new_wall->texture, sfTrue);
-    sfSprite_setPosition(new_wall->sprite, pos);
+    set_texture_and_pos(new_wall->texture, new_wall->sprite, pos);
 
     my_printf("Wall created at: %d\t%d\n", (int)pos.x, (int)pos.y);
     return (new_wall);
@@ -41,9 +45,7 @@ spike_t *create_spike(sfVector2f pos, int type)
     new_spike->size = 1;
     if (!new_spike->texture || !new_spike->sprite)
         return (NULL);
-
-    sfSprite_setTexture(new_spike->sprite, new_spike->texture, sfTrue);
-    sfSprite_setPosition(new_spike->sprite, pos);
+    set_texture_and_pos(new_spike->texture, new_spike->sprite, pos);
 
     my_printf("Spike created at: %d\t%d\n", (int)pos.x, (int)pos.y);
     return (new_spike);
@@ -52,26 +54,15 @@ spike_t *create_spike(sfVector2f pos, int type)
 scenery_t *create_scenery(sfVector2f pos, char *path, int active)
 {
     scenery_t *new_scenery = NULL;
-    sfIntRect rect = {0, 0, 3840, 1080};
 
     new_scenery = malloc(sizeof(scenery_t));
     if (!new_scenery)
         return (NULL);
-    new_scenery->texture = sfTexture_createFromFile(path, NULL);
-    new_scenery->sprite = sfSprite_create();
-    new_scenery->speed = (sfVector2f) {-2, 0};
-    new_scenery->active = active;
+    init_scenery(new_scenery, path, active);
     if (!new_scenery->texture || !new_scenery->sprite)
         return (NULL);
-    
-    sfSprite_setTexture(new_scenery->sprite, new_scenery->texture, sfTrue);
-    sfSprite_setPosition(new_scenery->sprite, pos);
-    sfSprite_setTextureRect(new_scenery->sprite, rect);
+    set_texture_and_pos(new_scenery->texture, new_scenery->sprite, pos);
 
     my_printf("Scenery element created at: %d\t%d\n", (int)pos.x, (int)pos.y);
     return (new_scenery);
 }
-
-/*
-    --  UTILISER LE PARSER JSON POUR POUVOIR LIRE LES CHEMINS D'ACCÈS VERS LES SPRITES DE CHAQUE ELEMENTS
-*/

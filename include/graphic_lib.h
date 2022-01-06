@@ -43,4 +43,8 @@ list_t *load_background(void);
 
 void move_scenery(list_t *background_list);
 
+//PARSING
+
+void **open_file(char *path, char *key_id, void **value);
+
 #endif

@@ -5,17 +5,6 @@
 ** header file for my_runner
 */
 
-/*
-    Faire une structure par type avec chacune son type et son constructeur
-        - 0 background
-        - 1 murs/sol
-        - 2 spykes
-        - 3 ennemis
-        - 4 joueur
-        - 5 portails ?? faire un type pour celui d'arrivée et un pour celui d'entrée et les link par id ???
-    FAIRE MAP LABYRINTHE AVEC LES PORTAILS
-*/
-
 #ifndef MY_RUNNER_H_
     #define MY_RUNNER_H_
 
@@ -25,9 +14,9 @@
 #define WALL_PATH   "ressources/img/wall.png"
 #define SPIKE_PATH  "ressources/img/spike.png"
 
-#define BACKGROUND_1 "ressources/img/city.png"
-#define BACKGROUND_2 "ressources/img/cloud.png"
-#define BACKGROUND_3 "ressources/img/mountains.png"
+#define BACKGROUND_1 "ressources/json/background_1.json"
+#define BACKGROUND_2 "ressources/json/background_2.json"
+#define BACKGROUND_3 "ressources/json/background_3.json"
 
 #define NB_BACKGROUND 3
 
@@ -66,6 +55,8 @@ wall_t *create_wall(sfVector2f pos, int type);
 spike_t *create_spike(sfVector2f pos, int type);
 
 scenery_t *create_scenery(sfVector2f pos, char *path, int active);
+
+void init_scenery(scenery_t *scenery, char *path, int active);
 
 void display_background(list_t *list, sfRenderWindow *window);
 

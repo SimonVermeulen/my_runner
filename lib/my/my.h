@@ -10,7 +10,7 @@
 #ifndef MY_H_
     #define MY_H_
 
-    #define is_number(c) (c >= '0' && c <= '9') ? 1 : 0
+    #define is_num(c) (c >= '0' && c <= '9') ? 1 : 0
 
     #define is_printable(c) (c >= 32 && c < 127) ? 1 : 0
 
@@ -54,6 +54,7 @@ int my_get_index(char converted_char, char *str);
 char *my_convert_base(int nb, char *base);
 int my_printf(const char *format, ...);
 int my_atoi(char const *str);
+float my_atof(char const *str);
 
 //----------------------MY_PRINTF-----------------------------
 

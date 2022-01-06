@@ -9,7 +9,9 @@ SRC	=	lib/graphic/list.c				\
 		lib/graphic/load_background.c	\
 		lib/graphic/load_map.c			\
 		lib/graphic/parallax.c			\
+		lib/graphic/search_by_key.c		\
 		src/create_structs.c			\
+		src/init.c						\
 		src/game_loop.c					\
 		src/my_runner.c
 
@@ -25,6 +27,7 @@ $(NAME):
 
 clear:
 	rm -f $(OBJ)
+	$(MAKE) -C ./lib/my/ clean
 
 fclean:
 	rm -f $(NAME) $(OBJ)
