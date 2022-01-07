@@ -5,7 +5,7 @@
 ** list functions
 */
 
-#include "../../include/graphic_lib.h"
+#include "graphic_lib.h"
 #include <stdlib.h>
 
 list_t *create_empty_list(void)
@@ -28,6 +28,8 @@ void add_node(list_t *list, void *data, int type)
 
     new_node = malloc(sizeof(node_t));
     if (!new_node)
+        return;
+    if (!data)
         return;
     new_node->data = data;
     new_node->type = type;

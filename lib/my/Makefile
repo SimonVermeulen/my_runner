@@ -51,10 +51,8 @@ NAME	=	libmy.a
 
 all:	$(NAME)
 
-$(NAME): $(SRC) $(OBJ)
-	gcc -c $(SRC)
+$(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
-	cp $(NAME) ./../
 	cp $(NAME) ./../../
 	cp my.h ./../../include
 
@@ -62,6 +60,6 @@ clean:
 	rm -f *.o
 
 fclean:
-	rm -f $(OBJ) $(NAME) ./../$(NAME) ./../../$(NAME) ./include/my.h
+	rm -f $(OBJ) $(NAME) ./../../$(NAME) ./include/my.h
 
 re: fclean all

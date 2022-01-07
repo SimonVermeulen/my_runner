@@ -5,31 +5,33 @@
 ## Makefile
 ##
 
-SRC	=	lib/graphic/list.c				\
-		lib/graphic/load_background.c	\
-		lib/graphic/load_map.c			\
-		lib/graphic/parallax.c			\
-		lib/graphic/search_by_key.c		\
-		src/create_structs.c			\
+SRC	=	src/create_structs.c			\
 		src/init.c						\
 		src/game_loop.c					\
 		src/my_runner.c
 
 OBJ	=	$(SRC:.c=.o)
 
+FLAGS =	-L./ -lgraphic -L./ -lmy -lcsfml-graphics -lcsfml-system
+
 NAME	=	my_runner
 
 all:	$(NAME)
 
-$(NAME):
+$(NAME): $(OBJ)
 	$(MAKE) -C ./lib/my/
-	gcc -o $(NAME) $(SRC) -L./lib/my -lmy -lcsfml-graphics -lcsfml-system -g3
+	$(MAKE) -C ./lib/graphic/
+	gcc -o $(NAME) $(OBJ) $(FLAGS) -g3
 
-clear:
+clean:
 	rm -f $(OBJ)
 	$(MAKE) -C ./lib/my/ clean
+	$(MAKE) -C ./lib/graphic/ clean
 
 fclean:
 	rm -f $(NAME) $(OBJ)
+	$(MAKE) -C ./lib/my/ fclean
+	$(MAKE) -C ./lib/graphic/ fclean
+
 
 re: fclean all

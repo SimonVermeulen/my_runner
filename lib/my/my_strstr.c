@@ -5,6 +5,8 @@
 ** find a substring in a string
 */
 
+#include <stdlib.h>
+
 static int mystrle(char const *str)
 {
     int i = 0;
@@ -48,5 +50,5 @@ char *my_strstr(char *str, char const *to_find)
     i--;
     if (j == size)
         return (&str[i]);
-    return (0);
+    return (NULL);
 }

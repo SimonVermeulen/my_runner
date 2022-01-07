@@ -7,9 +7,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../include/graphic_lib.h"
 #include "../../include/my_runner.h"
 #include "../../include/my.h"
+#include "graphic_lib.h"
 
 scenery_t *choose_next(node_t *node, int i)
 {
@@ -32,7 +32,7 @@ void move_scenery(list_t *background_list)
         if (rect.x < -1920 && next_bckgrnd->active == -1) {
             next_bckgrnd = choose_next(current_node, i);
             next_bckgrnd->active = 1;
-            sfSprite_setPosition(next_bckgrnd->sprite, (sfVector2f) {1920, 0});
+            sfSprite_setPosition(next_bckgrnd->sprite, (sfVector2f) {1920 + next_bckgrnd->speed.x, 0});
         }
         if (rect.x < -3840)
             current_bckgrnd->active = -1;
@@ -41,6 +41,12 @@ void move_scenery(list_t *background_list)
         current_node = current_node->next;
         current_bckgrnd = (scenery_t *) current_node->data;
     }
+}
+
+void move_map(list_t *map_list)
+{
+    node_t *current_node = map_list->head;
+    
 }
 
 void display_background(list_t *list, sfRenderWindow *window)
@@ -57,10 +63,3 @@ void display_background(list_t *list, sfRenderWindow *window)
         current = current->next;
     }
 }
-/*
-trouver pourquoi petite cindure une fois sur deux (sans doute à cause de la vitesse) 
-
-vitesse * 3 semble marcher (from a chaque fois to une fois sur deux)
-
-trouver solutions pour les lignes trop longues (macro ?)
-*/

@@ -5,7 +5,6 @@
 ** game_loop
 */
 
-#include "../include/graphic_lib.h"
 #include "../include/my_runner.h"
 
 void    display_active_nodes(list_t *list, sfRenderWindow *window)

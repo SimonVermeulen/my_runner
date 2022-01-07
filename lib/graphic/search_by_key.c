@@ -13,8 +13,8 @@ static int get_value_len(char *line)
 {
     int value_len = 0;
 
-    for (; line[value_len] != ','; value_len++);
-    return (value_len - 1);
+    for (; line[value_len] && line[value_len] != '"'; value_len++);
+    return (value_len);
 }
 
 static char *get_char_value(char *line)
@@ -55,16 +55,20 @@ static void *get_value(char *line)
     return (value);
 }
 
-void **open_file(char *path, char *key_id, void **value)
+int open_file(char *path, char *key_id, void **value)
 {
     char *line_value = NULL;
     size_t len = 0;
-    FILE *fd;
+    FILE *fd = NULL;
 
+    *value = NULL;
     fd = fopen(path, "r");
+    if (!fd)
+        return (1);
     while (getline(&line_value, &len, fd) != -1 && !*value) {
         if (my_strstr(line_value, key_id))
             *value = get_value(line_value);
     }
     fclose(fd);
+    return (0);
 }
