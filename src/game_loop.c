@@ -45,10 +45,12 @@ void launch_game(list_t *map, list_t *background)
     sfRenderWindow *window = init_window(window, 1080, 1920, "my_runner");
     sfClock *clock = sfClock_create();
     float seconds = 0;
+    sfEvent event;
     sfTime time;
 
     sfRenderWindow_setFramerateLimit(window, 144);
     while (sfRenderWindow_isOpen(window)) {
+        while (sfWindow_pollEvent(window, &event))
         if (seconds > 0.01) {
             display(background, map, window);
             sfClock_restart(clock);

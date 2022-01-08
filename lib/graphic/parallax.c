@@ -11,12 +11,25 @@
 #include "../../include/my.h"
 #include "graphic_lib.h"
 
-scenery_t *choose_next(node_t *node, int i)
+scenery_t *choose_next(node_t *node, int i, int opt)
 {
-    if (!(i % 2))
-        return ((scenery_t *) node->next->data);
-    else
-        return ((scenery_t *) node->prev->data);
+    scenery_t *next_bckgd = NULL;
+    sfVector2f pos = {0, 0};
+
+    if (!(i % 2)) {
+        next_bckgd = (scenery_t *) node->next->data;
+        if (opt) {
+            pos.x = 1920 + next_bckgd->speed.x;
+            sfSprite_setPosition(next_bckgd->sprite, pos);
+        }
+    } else {
+        next_bckgd = (scenery_t *) node->prev->data;
+        if (opt) {
+            pos.x = 1920 + 2 * next_bckgd->speed.x;
+            sfSprite_setPosition(next_bckgd->sprite, pos);
+        }
+    }
+    return (next_bckgd);
 }
 
 void move_scenery(list_t *background_list)
@@ -28,11 +41,10 @@ void move_scenery(list_t *background_list)
 
     for (int i = 0; i < background_list->nb_elements; i++) {
         rect = sfSprite_getPosition(current_bckgrnd->sprite);
-        next_bckgrnd = choose_next(current_node, i);
+        next_bckgrnd = choose_next(current_node, i, 0);
         if (rect.x < -1920 && next_bckgrnd->active == -1) {
-            next_bckgrnd = choose_next(current_node, i);
+            next_bckgrnd = choose_next(current_node, i, 1);
             next_bckgrnd->active = 1;
-            sfSprite_setPosition(next_bckgrnd->sprite, (sfVector2f) {1920 + next_bckgrnd->speed.x, 0});
         }
         if (rect.x < -3840)
             current_bckgrnd->active = -1;
@@ -41,12 +53,6 @@ void move_scenery(list_t *background_list)
         current_node = current_node->next;
         current_bckgrnd = (scenery_t *) current_node->data;
     }
-}
-
-void move_map(list_t *map_list)
-{
-    node_t *current_node = map_list->head;
-    
 }
 
 void display_background(list_t *list, sfRenderWindow *window)

@@ -20,7 +20,7 @@ int main(int ac, char **av)
 
     map_list = load_map(av[1], legend);
     if (!map_list || !map_list->nb_elements)
-        return(84);
+        return (84);
 
     background_list = load_background();
     if (!background_list->nb_elements)
