@@ -28,7 +28,8 @@ void jump(player_t *player)
         sfSprite_move(player->sprite, player->gravity);
 }
 
-int check_floor_hitbox(player_t *player, sfVector2f player_pos, sfVector2f blockoord)
+static int check_floor_hitbox(player_t *player, sfVector2f player_pos,
+    sfVector2f blockoord)
 {
     if (player_pos.x >= blockoord.x && player_pos.x <= blockoord.x + 50 &&
         player_pos.y + player->gravity.y >= blockoord.y) {
@@ -43,7 +44,8 @@ int check_floor_hitbox(player_t *player, sfVector2f player_pos, sfVector2f block
     return (0);
 }
 
-int check_wall_hitbox(player_t *player, sfVector2f player_pos, sfVector2f blockoord)
+static int check_wall_hitbox(player_t *player, sfVector2f player_pos,
+    sfVector2f blockoord)
 {
     if (player_pos.x >= blockoord.x - 2 &&
         player_pos.x <= blockoord.x + 50 - 2)

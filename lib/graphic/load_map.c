@@ -35,4 +35,3 @@ list_t *load_map(char *path, char **legend,
         return (NULL);
     return (map_list);
 }
-

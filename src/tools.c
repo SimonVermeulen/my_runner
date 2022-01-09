@@ -51,21 +51,21 @@ sfVector2f get_offset(list_t *map)
     return (max_coord);
 }
 
-sfVector2f apply_offset(list_t *map, sfVector2f max_coord)
+sfVector2f apply_offset(list_t *map, sfVector2f max_coo)
 {
     block_t *current_block = (block_t *) map->head->data;
     node_t *current_node = map->head;
 
-    max_coord.y = 1080 - max_coord.y - 100;
+    max_coo.y = 1080 - max_coo.y - 100;
     for (int i = 0; i < map->nb_elements; i++) {
         current_node = current_node->next;
         if (current_node->type < 3) {
             current_block = (block_t *) current_node->data;
 
-            sfSprite_move(current_block->sprite, (sfVector2f) {0, max_coord.y});
+            sfSprite_move(current_block->sprite, (sfVector2f) {0, max_coo.y});
         }
     }
-    return (max_coord);
+    return (max_coo);
 }
 
 player_t *check_player(list_t *map, sfVector2f offset)

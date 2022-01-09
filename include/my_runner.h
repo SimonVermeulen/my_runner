@@ -12,7 +12,10 @@
     #include "graphic_lib.h"
 
 #define LEGEND_PATH "ressources/json/legend.json"
-#define NB_OBJECTS 2
+
+enum NB_OBJECTS {
+    NB_OBJECTS = 2
+};
 
 #define WALL_PATH   "ressources/json/wall.json"
 #define SPIKE_PATH  "ressources/json/spike.json"
@@ -24,9 +27,11 @@
 #define JSON_ERROR "Cannot load json file, launch from default repository\n"
 #define IMG_ERROR "Cannot load png file, launch from default repository\n"
 
-#define NB_BACKGROUND 3
+enum NB_BACKGROUND {
+    NB_BACKGROUND = 3   
+};
 
-#define IS_VALID_CHAR(c, max) (c >= max && c != '\0' && c != ' ' && c != '\n') ? 0 : 1
+#define VALID_CHAR(c, m) (c >= m && c != '\0' && c != 32 && c != '\n') ? 0 : 1
 
 //STRUCTS DEFS
 

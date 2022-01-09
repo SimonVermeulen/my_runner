@@ -25,7 +25,7 @@ int create_from_line(list_t *list, char *line, int line_index,
             stop = add_node(list, create_block(pos, legend[c], c), c + 1);
         else if (line[char_index] == '3')
             stop = add_node(list, create_player(pos, legend[c]), c + 1);
-        if (!IS_VALID_CHAR(line[char_index], '4'))
+        if (!VALID_CHAR(line[char_index], '4'))
             return (1);
         if (stop)
             return (2);
