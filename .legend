@@ -1,0 +1,8 @@
+map characters should stick between 1 and 3
+
+1 : floor and wall
+2 : spike
+3 : character_spawn_location
+
+max map height is 10 lines
+there is no x limit for the map
