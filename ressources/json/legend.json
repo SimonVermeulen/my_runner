@@ -1,5 +1,6 @@
 {
-    "nb_objects": 2,
+    "nb_objects": 3,
     "block_1": "ressources/json/wall.json",
-    "block_2": "ressources/json/spike.json"
+    "block_2": "ressources/json/spike.json",
+    "block_3": "ressources/json/player.json"
 }

@@ -5,8 +5,7 @@
 ## Makefile
 ##
 
-SRC	=   handle_events.c		\
-		search_by_key.c		\
+SRC	=   search_by_key.c		\
 		load_legend.c		\
 		load_map.c			\
 		list.c

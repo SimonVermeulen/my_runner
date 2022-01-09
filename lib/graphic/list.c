@@ -21,16 +21,14 @@ list_t *create_empty_list(void)
     return (new_list);
 }
 
-void add_node(list_t *list, void *data, int type)
+int add_node(list_t *list, void *data, int type)
 {
     node_t *head = list->head;
     node_t *new_node = NULL;
 
     new_node = malloc(sizeof(node_t));
-    if (!new_node)
-        return;
-    if (!data)
-        return;
+    if (!new_node || !data)
+        return (1);
     new_node->data = data;
     new_node->type = type;
     if (!head) {
@@ -43,6 +41,7 @@ void add_node(list_t *list, void *data, int type)
         head->prev = new_node;
     }
     list->nb_elements++;
+    return (0);
 }
 
 void delete_element(list_t *list, int id)

@@ -8,7 +8,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
 #include "../../include/my.h"
 #include "graphic_lib.h"
 
@@ -29,10 +28,11 @@ list_t *load_map(char *path, char **legend,
         stop = f(map_list, line, l_index, legend);
     free(line);
     fclose(map);
-    if (!map_list->nb_elements || stop) {
+    if (!map_list->nb_elements || stop == 1) {
         write(2, "Error: pls select a valid map\n", 30);
         return (NULL);
-    }
+    } else if (stop == 2)
+        return (NULL);
     return (map_list);
 }
 

@@ -5,11 +5,12 @@
 ## Makefile
 ##
 
-SRC	=	src/load_background.c			\
-		src/create_structs.c			\
+SRC	=	src/create_structs.c			\
+		src/player_tools.c				\
 		src/game_loop.c					\
 		src/my_runner.c					\
 		src/parallax.c					\
+		src/tools.c						\
 		src/init.c
 
 OBJ	=	$(SRC:.c=.o)

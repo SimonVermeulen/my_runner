@@ -7,20 +7,31 @@
 
 #include "../include/my_runner.h"
 
-void    display_active_nodes(list_t *list, sfRenderWindow *window)
+static void handle_events(sfEvent event, sfRenderWindow *window,
+    player_t *player)
 {
-    node_t *current = list->head->next;
-    to_display_t *to_display = (to_display_t *) list->head->data;
+    if (event.key.code == sfKeyEscape || event.type == sfEvtClosed)
+        sfRenderWindow_close(window);
+    if (event.type == sfEvtKeyPressed && player->is_onfloor &&
+        event.key.code == sfKeySpace)
+        launch_jump(player);
+}
 
-    sfRenderWindow_drawSprite(window, to_display->sprite, NULL);
-    while (current != list->head) {
+static void display_active_nodes(list_t *list, sfRenderWindow *window)
+{
+    node_t *current = list->head;
+    to_display_t *to_display = NULL;
+
+    for (int i = 0; i < list->nb_elements; i++) {
         to_display = (to_display_t *) current->data;
-        sfRenderWindow_drawSprite(window, to_display->sprite, NULL);
+        if (current->type != 3)
+            sfRenderWindow_drawSprite(window, to_display->sprite, NULL);
         current = current->next;
     }
 }
 
-void display(list_t *map, list_t *background, sfRenderWindow *window)
+static void display(list_t *map, list_t *background, player_t *player,
+    sfRenderWindow *window)
 {
     sfRenderWindow_clear(window, sfBlue);
     move_scenery(background);
@@ -28,11 +39,14 @@ void display(list_t *map, list_t *background, sfRenderWindow *window)
     display_background(background, window);
     if (map->nb_elements)
         display_active_nodes(map, window);
+    check_hitbox(player, map);
+    jump(player);
+    sfRenderWindow_drawSprite(window, player->sprite, NULL);
     sfRenderWindow_display(window);
 }
 
-sfRenderWindow *init_window(sfRenderWindow *window, int height, int width,
-    char *name)
+static sfRenderWindow *init_window(sfRenderWindow *window, int height,
+    int width, char *name)
 {
     sfVideoMode mode;
 
@@ -53,14 +67,14 @@ void launch_game(list_t *map, list_t *background, player_t *player)
     sfRenderWindow_setFramerateLimit(window, 144);
     while (sfRenderWindow_isOpen(window)) {
         while (sfRenderWindow_pollEvent(window, &event))
-            handle_events(event, window);
+            handle_events(event, window, player);
         if (seconds > 0.01) {
-            display(map, background, window);
+            display(map, background, player, window);
             sfClock_restart(clock);
         }
         time = sfClock_getElapsedTime(clock);
         seconds = time.microseconds / 1000000.0;
-        if (!fmap->nb_elements)
+        if (map->nb_elements == 1 && map->head->type == 3)
             sfRenderWindow_close(window);
     }
 }

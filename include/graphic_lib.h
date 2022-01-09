@@ -32,7 +32,7 @@ typedef struct list_s {
 
 list_t *create_empty_list(void);
 
-void add_node(list_t *list, void *data, int type);
+int add_node(list_t *list, void *data, int type);
 
 void delete_element(list_t *list, int id);
 
@@ -48,9 +48,5 @@ char **load_legend(char *path);
 //PARSING
 
 int open_file(char *path, char *key_id, void **value);
-
-//EVENT HANDLING
-
-void handle_events(sfEvent event, sfRenderWindow *window);
 
 #endif

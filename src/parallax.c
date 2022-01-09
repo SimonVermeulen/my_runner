@@ -44,15 +44,18 @@ void move_map(list_t *map_list)
         current_block = (block_t *) current_node->data;
     }
     for (int i = 0; i < map_list->nb_elements + nb_destroyed; i++) {
-        if (sfSprite_getPosition(current_block->sprite).x + 100 < 0) {
+        if (sfSprite_getPosition(current_block->sprite).x + 50 < 0) {
             current_node = current_node->next;
             current_block = (block_t *) current_node->data;
             delete_element(map_list, i - nb_destroyed);
             nb_destroyed++;
-        } else {
+        } else if (current_node->type < 3) {
             sfSprite_move(current_block->sprite, (sfVector2f) {-2, 0});
             current_node = current_node->next;
-            current_block = (block_t *) current_node->data;    
+            current_block = (block_t *) current_node->data;
+        } else {
+            current_node = current_node->next;
+            current_block = (block_t *) current_node->data;
         }
     }
 }

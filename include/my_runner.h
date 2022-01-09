@@ -21,6 +21,9 @@
 #define BACKGROUND_2 "ressources/json/background_2.json"
 #define BACKGROUND_3 "ressources/json/background_3.json"
 
+#define JSON_ERROR "Cannot load json file, launch from default repository\n"
+#define IMG_ERROR "Cannot load png file, launch from default repository\n"
+
 #define NB_BACKGROUND 3
 
 #define IS_VALID_CHAR(c, max) (c >= max && c != '\0' && c != ' ' && c != '\n') ? 0 : 1
@@ -50,17 +53,25 @@ typedef struct to_display_s {
 typedef struct player_s {
     sfTexture *texture;
     sfSprite *sprite;
-    int is_jumping; 
+    int is_jumping;
+    int is_onfloor;
     sfVector2f gravity;
+    sfVector2f default_gravity;
 } player_t;
 
 /*-------------------PROTOTYPES--------------------------*/
 
 //GAME LOADING
 
-void launch_game(list_t *map, list_t *background);
+void launch_game(list_t *map, list_t *background, player_t *player);
 
 list_t *load_background(void);
+
+sfVector2f get_offset(list_t *map);
+
+sfVector2f apply_offset(list_t *map, sfVector2f max_coord);
+
+player_t *check_player(list_t *map, sfVector2f offset);
 
 //CREATE
 
@@ -71,12 +82,15 @@ block_t *create_block(sfVector2f pos, char *path, int type);
 
 scenery_t *create_scenery(sfVector2f pos, char *path, int active);
 
+player_t *create_player(sfVector2f pos, char *path);
+
 //INIT
 
 int init_scenery(scenery_t *scenery, char *path, int active);
 
 int init_block(block_t *block, char *path, int type);
 
+int init_player(player_t *player, char *path);
 
 //PARALLAX
 
@@ -87,5 +101,13 @@ void move_map(list_t *map_list);
 //DISPLAY
 
 void display_background(list_t *list, sfRenderWindow *window);
+
+//PLAYER
+
+void jump(player_t *player);
+
+void launch_jump(player_t *player);
+
+void check_hitbox(player_t *player, list_t *map);
 
 #endif
