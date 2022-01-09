@@ -19,10 +19,13 @@ int init_scenery(scenery_t *scenery, char *path, int active)
     if (scenery->texture)
         scenery->sprite = sfSprite_create();
     open_file(path, "speed_x", &data);
-    speed.x = *(float *) data * -1.0;
+    if (!data)
+        return (1);
+    speed.x = *(float *) data * -1.0;    
     open_file(path, "speed_y", &data);
+    if (!data)
+        return (1);
     speed.y = *(float *) data;
-
     scenery->speed = speed;
     scenery->active = active;
     return (0);
@@ -38,8 +41,12 @@ int init_block(block_t *block, char *path, int type)
     if (block->texture)
         block->sprite = sfSprite_create();
     open_file(path, "dmg", &data);
+    if (!data)
+        return (1);
     block->dmg = *(int *) data;
     open_file(path, "bounciness", &data);
+    if (!data)
+        return (1);
     block->bounciness = *(int *) data;
     block->type = *(int *) data;
     return (0);
@@ -55,8 +62,12 @@ int init_player(player_t *player, char *path)
     if (player->texture)
         player->sprite = sfSprite_create();
     open_file(path, "is_jumping", &data);
+    if (!data)
+        return (1);
     player->is_jumping = *(int *) data;
     open_file(path, "gravity", &data);
+    if (!data)
+        return (1);
     player->gravity = (sfVector2f) {0, *(float *) data};
     player->default_gravity = player->gravity;
     player->is_onfloor = 0;
