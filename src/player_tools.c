@@ -45,11 +45,10 @@ int check_floor_hitbox(player_t *player, sfVector2f player_pos, sfVector2f block
 
 int check_wall_hitbox(player_t *player, sfVector2f player_pos, sfVector2f blockoord)
 {
-
     if (player_pos.x >= blockoord.x - 2 &&
-        player_pos.x <= blockoord.x + 50 - 2 &&
-        player_pos.y == blockoord.y)
-        return(0);
+        player_pos.x <= blockoord.x + 50 - 2)
+        if (player_pos.y + 70 == blockoord.y + 70)
+            return (1);
     return (0);
 }
 

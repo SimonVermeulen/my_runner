@@ -85,7 +85,7 @@ void move_scenery(list_t *background_list)
 
 void display_background(list_t *list, sfRenderWindow *window)
 {
-    node_t *current = list->head->next;
+    node_t *current = list->head->prev;
     scenery_t *scenery = (scenery_t *) list->head->data;
 
     if (scenery->active != -1)
@@ -94,6 +94,6 @@ void display_background(list_t *list, sfRenderWindow *window)
         scenery = (scenery_t *) current->data;
         if (scenery->active != -1)
             sfRenderWindow_drawSprite(window, scenery->sprite, NULL);
-        current = current->next;
+        current = current->prev;
     }
 }
