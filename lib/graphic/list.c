@@ -53,10 +53,12 @@ void delete_element(list_t *list, int id)
     for (int i = 0; i < id; i++)
         current = current->next;
 
+    if (current == head)
+        list->head = current->next;
     current->prev->next = current->next;
     current->next->prev = current->prev;
-    if (current == head)
-        list->head = current;
+
+    list->nb_elements--;
     free(current);
 }
 

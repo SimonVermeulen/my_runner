@@ -7,9 +7,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../include/my_runner.h"
-#include "../../include/my.h"
-#include "graphic_lib.h"
+
+#include "../include/my_runner.h"
+#include "../include/my.h"
+#include "../include/graphic_lib.h"
 
 scenery_t *choose_next(node_t *node, int i, int opt)
 {
@@ -30,6 +31,30 @@ scenery_t *choose_next(node_t *node, int i, int opt)
         }
     }
     return (next_bckgd);
+}
+
+void move_map(list_t *map_list)
+{
+    node_t *current_node = NULL;
+    block_t *current_block = NULL;
+    int nb_destroyed = 0;
+
+    if (map_list->nb_elements) {
+        current_node = map_list->head;
+        current_block = (block_t *) current_node->data;
+    }
+    for (int i = 0; i < map_list->nb_elements + nb_destroyed; i++) {
+        if (sfSprite_getPosition(current_block->sprite).x + 100 < 0) {
+            current_node = current_node->next;
+            current_block = (block_t *) current_node->data;
+            delete_element(map_list, i - nb_destroyed);
+            nb_destroyed++;
+        } else {
+            sfSprite_move(current_block->sprite, (sfVector2f) {-2, 0});
+            current_node = current_node->next;
+            current_block = (block_t *) current_node->data;    
+        }
+    }
 }
 
 void move_scenery(list_t *background_list)

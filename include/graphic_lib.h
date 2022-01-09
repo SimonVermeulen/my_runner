@@ -8,8 +8,11 @@
 #ifndef GRAPHIC_LIB_H_
     #define GRAPHIC_LIB_H_
 
-//MACROS
-//STRUCT DEFS
+    #include <SFML/Graphics.h>
+
+/*---------------------------macros------------------------*/
+
+/*-------------------------struct defs---------------------*/
 
 typedef struct node_s {
     void *data;
@@ -23,6 +26,8 @@ typedef struct list_s {
     int nb_elements;
 } list_t;
 
+/*-------------------------prototypes---------------------*/
+
 //LIST PROTOTYPES
 
 list_t *create_empty_list(void);
@@ -35,18 +40,17 @@ void delete_list(list_t *list, node_t *current);
 
 //MAP LOADING
 
-list_t *load_map(char *path, char **legend);
+list_t *load_map(char *path, char **legend,
+    int (*f)(list_t *, char *, int, char **));
 
 char **load_legend(char *path);
-
-list_t *load_background(void);
-
-//PARALLAX
-
-void move_scenery(list_t *background_list);
 
 //PARSING
 
 int open_file(char *path, char *key_id, void **value);
+
+//EVENT HANDLING
+
+void handle_events(sfEvent event, sfRenderWindow *window);
 
 #endif

@@ -24,8 +24,10 @@ void display(list_t *map, list_t *background, sfRenderWindow *window)
 {
     sfRenderWindow_clear(window, sfBlue);
     move_scenery(background);
+    move_map(map);
     display_background(background, window);
-    display_active_nodes(map, window);
+    if (map->nb_elements)
+        display_active_nodes(map, window);
     sfRenderWindow_display(window);
 }
 
@@ -40,7 +42,7 @@ sfRenderWindow *init_window(sfRenderWindow *window, int height, int width,
     window = sfRenderWindow_create(mode, name, sfResize | sfClose, NULL);
 }
 
-void launch_game(list_t *map, list_t *background)
+void launch_game(list_t *map, list_t *background, player_t *player)
 {
     sfRenderWindow *window = init_window(window, 1080, 1920, "my_runner");
     sfClock *clock = sfClock_create();
@@ -50,12 +52,15 @@ void launch_game(list_t *map, list_t *background)
 
     sfRenderWindow_setFramerateLimit(window, 144);
     while (sfRenderWindow_isOpen(window)) {
-        while (sfWindow_pollEvent(window, &event))
+        while (sfRenderWindow_pollEvent(window, &event))
+            handle_events(event, window);
         if (seconds > 0.01) {
-            display(background, map, window);
+            display(map, background, window);
             sfClock_restart(clock);
         }
         time = sfClock_getElapsedTime(clock);
         seconds = time.microseconds / 1000000.0;
+        if (!fmap->nb_elements)
+            sfRenderWindow_close(window);
     }
 }

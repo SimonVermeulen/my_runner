@@ -2,10 +2,10 @@
 ** EPITECH PROJECT, 2021
 ** my_runner
 ** File description:
-** list functions
+** load background
 */
 
-#include "../../include/my_runner.h"
+#include "../include/my_runner.h"
 #include <stdlib.h>
 
 list_t *load_background(void)

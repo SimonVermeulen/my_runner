@@ -9,7 +9,7 @@
     #define MY_RUNNER_H_
 
     #include <SFML/Graphics.h>
-    #include "../lib/graphic/graphic_lib.h"
+    #include "graphic_lib.h"
 
 #define LEGEND_PATH "ressources/json/legend.json"
 #define NB_OBJECTS 2
@@ -47,11 +47,25 @@ typedef struct to_display_s {
     sfSprite *sprite;
 } to_display_t;
 
-//PROTOTYPES
+typedef struct player_s {
+    sfTexture *texture;
+    sfSprite *sprite;
+    int is_jumping; 
+    sfVector2f gravity;
+} player_t;
+
+/*-------------------PROTOTYPES--------------------------*/
+
+//GAME LOADING
 
 void launch_game(list_t *map, list_t *background);
 
+list_t *load_background(void);
+
 //CREATE
+
+int create_from_line(list_t *list, char *line, int line_index, 
+    char **legend);
 
 block_t *create_block(sfVector2f pos, char *path, int type);
 
@@ -62,6 +76,13 @@ scenery_t *create_scenery(sfVector2f pos, char *path, int active);
 int init_scenery(scenery_t *scenery, char *path, int active);
 
 int init_block(block_t *block, char *path, int type);
+
+
+//PARALLAX
+
+void move_scenery(list_t *background_list);
+
+void move_map(list_t *map_list);
 
 //DISPLAY
 

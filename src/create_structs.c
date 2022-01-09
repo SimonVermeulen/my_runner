@@ -9,6 +9,25 @@
 #include "../include/my.h"
 #include <stdlib.h>
 
+int create_from_line(list_t *list, char *line, int line_index, 
+    char **legend)
+{
+    sfVector2f pos = {0, (float)line_index * 50};
+    int line_size = my_strlen(line);
+    char c = 0;
+
+    for (int char_index = 0; char_index < line_size; char_index++) {
+        pos.x = (float)char_index * 50;
+        if (line[char_index] >= '1' && line[char_index] <= '2') {
+            c = line[char_index];
+            add_node(list, create_block(pos, legend[c - '1'], 1), c - 48);
+        }
+        if (!IS_VALID_CHAR(line[char_index], '3'))
+            return (1);
+    }
+    return (0);
+}
+
 void set_texture_and_pos(sfTexture *texture, sfSprite *sprite, sfVector2f pos)
 {
     sfSprite_setTexture(sprite, texture, sfTrue);

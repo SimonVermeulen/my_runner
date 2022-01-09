@@ -5,10 +5,12 @@
 ## Makefile
 ##
 
-SRC	=	src/create_structs.c			\
-		src/init.c						\
+SRC	=	src/load_background.c			\
+		src/create_structs.c			\
 		src/game_loop.c					\
-		src/my_runner.c
+		src/my_runner.c					\
+		src/parallax.c					\
+		src/init.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -21,7 +23,7 @@ all:	$(NAME)
 $(NAME): $(OBJ)
 	$(MAKE) -C ./lib/my/
 	$(MAKE) -C ./lib/graphic/
-	gcc -o $(NAME) $(OBJ) $(FLAGS) -g3
+	gcc -o $(NAME) $(OBJ) $(FLAGS) 
 
 clean:
 	rm -f $(OBJ)

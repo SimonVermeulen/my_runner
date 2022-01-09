@@ -5,11 +5,10 @@
 ## Makefile
 ##
 
-SRC	=   load_background.c	\
+SRC	=   handle_events.c		\
 		search_by_key.c		\
 		load_legend.c		\
 		load_map.c			\
-		parallax.c			\
 		list.c
 
 OBJ	=	$(SRC:.c=.o)
