@@ -19,7 +19,7 @@ list_t *load_map(char *path, char **legend,
     size_t len = 0;
     int stop = 0;
     FILE *map;
-    
+
     map = fopen(path, "r");
     map_list = create_empty_list();
     if (!map || !map_list)

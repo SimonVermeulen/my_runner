@@ -11,27 +11,28 @@
     #include <SFML/Graphics.h>
     #include "graphic_lib.h"
 
-#define LEGEND_PATH "ressources/json/legend.json"
+    #define LEGEND_PATH "ressources/json/legend.json"
+
+
+    #define WALL_PATH   "ressources/json/wall.json"
+    #define SPIKE_PATH  "ressources/json/spike.json"
+
+    #define BACKGROUND_1 "ressources/json/background_1.json"
+    #define BACKGROUND_2 "ressources/json/background_2.json"
+    #define BACKGROUND_3 "ressources/json/background_3.json"
+
+    #define JSON_ERROR "Cannot load json file, launch from default repository\n"
+    #define IMG_ERROR "Cannot load png file, launch from default repository\n"
 
 enum NB_OBJECTS {
     NB_OBJECTS = 2
 };
 
-#define WALL_PATH   "ressources/json/wall.json"
-#define SPIKE_PATH  "ressources/json/spike.json"
-
-#define BACKGROUND_1 "ressources/json/background_1.json"
-#define BACKGROUND_2 "ressources/json/background_2.json"
-#define BACKGROUND_3 "ressources/json/background_3.json"
-
-#define JSON_ERROR "Cannot load json file, launch from default repository\n"
-#define IMG_ERROR "Cannot load png file, launch from default repository\n"
-
 enum NB_BACKGROUND {
-    NB_BACKGROUND = 3   
+    NB_BACKGROUND = 3
 };
 
-#define VALID_CHAR(c, m) (c >= m && c != '\0' && c != 32 && c != '\n') ? 0 : 1
+    #define VALID_CHAR(c, m) (c >= m && c != '\0' && c != 32 && c != '\n') ? 0 : 1
 
 //STRUCTS DEFS
 
@@ -80,7 +81,7 @@ player_t *check_player(list_t *map, sfVector2f offset);
 
 //CREATE
 
-int create_from_line(list_t *list, char *line, int line_index, 
+int create_from_line(list_t *list, char *line, int line_index,
     char **legend);
 
 block_t *create_block(sfVector2f pos, char *path, int type);

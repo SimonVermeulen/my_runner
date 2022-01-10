@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int create_from_line(list_t *list, char *line, int line_index, 
+int create_from_line(list_t *list, char *line, int line_index,
     char **legend)
 {
     sfVector2f pos = {0, (float)line_index * 50};

@@ -21,7 +21,7 @@ int init_scenery(scenery_t *scenery, char *path, int active)
     open_file(path, "speed_x", &data);
     if (!data)
         return (1);
-    speed.x = *(float *) data * -1.0;    
+    speed.x = *(float *) data * -1.0;
     open_file(path, "speed_y", &data);
     if (!data)
         return (1);
@@ -55,7 +55,7 @@ int init_block(block_t *block, char *path, int type)
 int init_player(player_t *player, char *path)
 {
     void *data = NULL;
-    
+
     if (open_file(path, "path", &data))
         return (1);
     player->texture = sfTexture_createFromFile((char *) data, NULL);

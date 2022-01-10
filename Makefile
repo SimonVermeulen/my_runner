@@ -24,7 +24,7 @@ all:	$(NAME)
 $(NAME): $(OBJ)
 	$(MAKE) -C ./lib/my/
 	$(MAKE) -C ./lib/graphic/
-	gcc -o $(NAME) $(OBJ) $(FLAGS) 
+	gcc -o $(NAME) $(OBJ) $(FLAGS)
 
 clean:
 	rm -f $(OBJ)

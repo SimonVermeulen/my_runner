@@ -39,7 +39,7 @@ char **load_legend(char *path)
         open_file(path, concat_strings("block_", my_itos(i + 1)), &value);
         legend[i] = my_strdup(value);
     }
-    
+
     for (int i = 0; i < nb_objects; i++) {
         if (!legend[i])
             return (NULL);

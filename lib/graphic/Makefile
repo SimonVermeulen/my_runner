@@ -22,7 +22,7 @@ $(NAME): $(OBJ)
 	cp graphic_lib.h ./../../include
 
 clean:
-	rm -f $(OBJ) $(NAME) ./../../$(NAME) ./include/graphic_lib.h 
+	rm -f $(OBJ) $(NAME) ./../../$(NAME) ./include/graphic_lib.h
 
 fclean:
 	rm -f $(NAME) ../../$(NAME) $(OBJ)
