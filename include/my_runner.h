@@ -13,9 +13,8 @@
 
     #define LEGEND_PATH "ressources/json/legend.json"
 
-
-    #define WALL_PATH   "ressources/json/wall.json"
-    #define SPIKE_PATH  "ressources/json/spike.json"
+    #define WALL_PATH "ressources/json/wall.json"
+    #define SPIKE_PATH "ressources/json/spike.json"
 
     #define BACKGROUND_1 "ressources/json/background_1.json"
     #define BACKGROUND_2 "ressources/json/background_2.json"
@@ -32,7 +31,7 @@ enum NB_BACKGROUND {
     NB_BACKGROUND = 3
 };
 
-    #define VALID_CHAR(c, m) (c >= m && c != '\0' && c != 32 && c != '\n') ? 0 : 1
+    #define CHECKC(c, m) (c >= m && c != '\0' && c != 32 && c != '\n') ? 0 : 1
 
 //STRUCTS DEFS
 
@@ -69,7 +68,7 @@ typedef struct player_s {
 
 //GAME LOADING
 
-void launch_game(list_t *map, list_t *background, player_t *player);
+int launch_game(list_t *map, list_t *background, player_t *player);
 
 list_t *load_background(void);
 

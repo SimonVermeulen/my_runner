@@ -30,7 +30,8 @@ char **load_legend(char *path)
     int nb_objects = 0;
     void *value = NULL;
 
-    open_file(path, "nb_objects", &value);
+    if (open_file(path, "nb_objects", &value))
+        return (NULL);
     nb_objects = *(float *) value;
     legend = malloc(sizeof(char *) * nb_objects);
     if (!legend)

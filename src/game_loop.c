@@ -56,7 +56,7 @@ static sfRenderWindow *init_window(sfRenderWindow *window, int height,
     window = sfRenderWindow_create(mode, name, sfResize | sfClose, NULL);
 }
 
-void launch_game(list_t *map, list_t *background, player_t *player)
+int launch_game(list_t *map, list_t *background, player_t *player)
 {
     sfRenderWindow *window = init_window(window, 1080, 1920, "my_runner");
     sfClock *clock = sfClock_create();
@@ -77,4 +77,5 @@ void launch_game(list_t *map, list_t *background, player_t *player)
         if (map->nb_elements == 1 && map->head->type == 3)
             sfRenderWindow_close(window);
     }
+    return (0);
 }

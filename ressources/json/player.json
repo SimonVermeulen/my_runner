@@ -1,5 +1,5 @@
 {
     "path": "ressources/img/player.png",
     "is_jumping": 0,
-    "gravity": 5
+    "gravity": 4
 }

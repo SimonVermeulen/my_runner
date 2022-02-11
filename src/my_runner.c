@@ -31,6 +31,8 @@ int main(int ac, char **av)
     sfVector2f max_coord = {0};
 
     legend = load_legend(LEGEND_PATH);
+    if (!legend)
+        return (84);
     map_list = load_map(av[1], legend, &create_from_line);
     if (usage(ac, av[1]))
         return (0);
@@ -41,6 +43,5 @@ int main(int ac, char **av)
     background_list = load_background();
     if (!background_list->nb_elements || !player)
         return (84);
-    launch_game(map_list, background_list, player);
-    return (0);
+    return(launch_game(map_list, background_list, player));
 }
